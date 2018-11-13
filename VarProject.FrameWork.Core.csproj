@@ -66,6 +66,9 @@
     <Compile Include="Api\IRepository.cs" />
     <Compile Include="Api\IUnitOfData.cs" />
     <Compile Include="Attribute\ApiDocumentAttribute.cs" />
+    <Compile Include="Binder\BooleanValidatorModelBinder.cs" />
+    <Compile Include="Binder\MultiParameterSupportAttribute.cs" />
+    <Compile Include="Binder\SimplePostVariableParameterBinding.cs" />
     <Compile Include="Common\LinqExtensions.cs" />
     <Compile Include="Common\ObjectExtensions.cs" />
     <Compile Include="Common\WebApiExtensions.cs" />
@@ -92,7 +95,6 @@
     <Compile Include="Utils\GenUtil.cs" />
     <Compile Include="Utils\JsonUtility.cs" />
     <Compile Include="Utils\KVModel.cs" />
-    <Compile Include="Utils\QrCodeUtil.cs" />
     <Compile Include="Utils\SqlHelper.cs" />
   </ItemGroup>
   <ItemGroup />

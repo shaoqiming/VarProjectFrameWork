@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace VarProject.FrameWork.Core.Utils
 {
@@ -157,6 +158,42 @@ namespace VarProject.FrameWork.Core.Utils
             }
 
             return null;
+        }
+
+
+
+        public class DescendingAlphabeticComparer : IComparer<string>
+        {
+            public static Regex SortRegex = new Regex(@"^(?<sort>\d+\.\d+)\s(\w|\W)+$");
+
+            private double GetSort(string name)
+            {
+                MatchCollection matchs = SortRegex.Matches(name);
+                foreach (Match match in matchs)
+                {
+                    GroupCollection groups = match.Groups;
+                    Group g = groups["sort"];
+                    if (g != null)
+                    {
+                        double sort = Convert.ToDouble(g.Value);
+                        return sort;
+                    }
+                }
+                return 100;
+            }
+            public int Compare(string x, string y)
+            {
+                double sortX = GetSort(x);
+
+                System.Diagnostics.Debug.Write(x + "  -  " + y + "\r\n");
+
+                double sortY = GetSort(y);
+                if (sortX > 0 || sortY > 0)
+                {
+                    return -sortY.CompareTo(sortX);
+                }
+                return -y.CompareTo(x);
+            }
         }
     }
 }
