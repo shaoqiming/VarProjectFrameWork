@@ -12,7 +12,7 @@ namespace VarProject.FrameWork.Core.Api
         /// <summary>
         /// 返回值的消息体
         /// </summary>
-        public object Data { get; set; }
+        public T Data { get; set; }
         /// <summary>
         /// 返回状态
         /// </summary>
