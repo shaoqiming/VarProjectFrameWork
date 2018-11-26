@@ -9,13 +9,13 @@ namespace VarProject.FrameWork.Core.DataAccess
 
 
 
-        public DbContext DataContext
-        {
-            get
-            {
-                return unitofdata;
-            }
-        }
+        //public DbContext DataContext
+        //{
+        //    get
+        //    {
+        //        return unitofdata;
+        //    }
+        //}
 
         public DbSet<T> Dbset
         {
