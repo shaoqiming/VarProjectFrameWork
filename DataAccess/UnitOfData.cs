@@ -80,6 +80,52 @@ namespace VarProject.FrameWork.Core.DataAccess
         }
 
 
+
+        public int TransListSubmit()
+        {
+            int num = 0;
+            if (!(this.SqlTransList.IsNotEmpty() || this.UnitOfDatas.IsNotEmpty()))
+            {
+                return num;
+            }
+
+            SqlConnection connection = base.Database.Connection as SqlConnection;
+            using (connection)
+            {
+                if (connection.State == ConnectionState.Closed)
+                {
+                    connection.Open();
+                }
+
+                SqlTransaction transaction = connection.BeginTransaction();
+
+                //开启事务
+                using (transaction)
+                {
+                    try
+                    {
+                        foreach (var unitOfData in UnitOfDatas)
+                        {
+                            num += unitOfData.Submit();
+                        }
+
+                        num += this.SaveChanges();
+
+                        transaction.Commit();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e);
+                        transaction.Rollback();
+                        throw;
+                    }
+
+                }
+            }
+
+            return 0;
+        }
+
         public int AdoSubmit()
         {
             int num = 0;
@@ -176,9 +222,6 @@ namespace VarProject.FrameWork.Core.DataAccess
         {
             return base.Database.ExecuteSqlCommand(sql, param);
         }
-
-
-
 
 
         public void Dispose()
