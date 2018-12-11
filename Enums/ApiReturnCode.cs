@@ -17,6 +17,9 @@ namespace VarProject.FrameWork.Core.Enums
         [Description("Token无效")]
         TokenInvalid = -5,
 
+        [Description("未登录")]
+        NotLogin = -6,
+
         [Description("Token过期")]
         TokenExpire = -9,
 
